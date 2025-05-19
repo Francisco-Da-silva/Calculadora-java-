@@ -11,8 +11,57 @@ public class CalculadoraProcedimientos {
         System.out.println("4 - Division");
         System.out.println("0 - Salir");
     }
+    // MÉTODO PRINCIPAL
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);  // Declaramos el Scanner
+        boolean continuar = true;
 
-    // SUMA
+        while (continuar) {
+            menu();  // Mostramos el menú
+
+            System.out.print("Opcion: ");
+            int operacion = scanner.nextInt();
+
+            // Verificamos si el usuario quiere salir
+            if (operacion == 0) {
+                System.out.println("Salir del programa");
+                break;
+            }
+
+            // Validar operación
+            while (operacion < 0 || operacion > 4) {
+                System.out.println("Operacion invalida, ingrese otra opcion:");
+                operacion = scanner.nextInt();
+            }
+
+            // Pedir los números
+            System.out.print("Ingrese el primer numero: ");
+            int num1 = scanner.nextInt();
+
+            System.out.print("Ingrese el segundo numero: ");
+            int num2 = scanner.nextInt();
+
+            // Ejecutar operación
+            switch (operacion) {
+                case 1 -> suma(num1, num2);
+                case 2 -> resta(num1, num2);
+                case 3 -> multiplicacion(num1, num2);
+                case 4 -> division(num1, num2);
+            }
+
+            // Preguntar si desea realizar otra operación
+            System.out.print("¿Desea realizar otra operacion? (s/n): ");
+            char respuesta = scanner.next().toLowerCase().charAt(0);
+            if (respuesta != 's') {
+                continuar = false;
+            }
+        }
+
+        System.out.println("Programa finalizado.");
+        scanner.close();
+    }
+
+    // SUMA 
     public static void suma(int num1, int num2) {
         if (num1 >= 0 && num2 >= 0) {  // Verifica si los números son positivos
             int resultado = num1 + num2;
@@ -81,53 +130,5 @@ public class CalculadoraProcedimientos {
         }
     }
 
-    // MÉTODO PRINCIPAL
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);  // Declaramos el Scanner
-        boolean continuar = true;
-
-        while (continuar) {
-            menu();  // Mostramos el menú
-
-            System.out.print("Opcion: ");
-            int operacion = scanner.nextInt();
-
-            // Verificamos si el usuario quiere salir
-            if (operacion == 0) {
-                System.out.println("Salir del programa");
-                break;
-            }
-
-            // Validar operación
-            while (operacion < 0 || operacion > 4) {
-                System.out.println("Operacion invalida, ingrese otra opcion:");
-                operacion = scanner.nextInt();
-            }
-
-            // Pedir los números
-            System.out.print("Ingrese el primer numero: ");
-            int num1 = scanner.nextInt();
-
-            System.out.print("Ingrese el segundo numero: ");
-            int num2 = scanner.nextInt();
-
-            // Ejecutar operación
-            switch (operacion) {
-                case 1 -> suma(num1, num2);
-                case 2 -> resta(num1, num2);
-                case 3 -> multiplicacion(num1, num2);
-                case 4 -> division(num1, num2);
-            }
-
-            // Preguntar si desea realizar otra operación
-            System.out.print("¿Desea realizar otra operacion? (s/n): ");
-            char respuesta = scanner.next().toLowerCase().charAt(0);
-            if (respuesta != 's') {
-                continuar = false;
-            }
-        }
-
-        System.out.println("Programa finalizado.");
-        scanner.close();
-    }
+    
 }
